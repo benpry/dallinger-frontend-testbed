@@ -5,6 +5,11 @@ var nTrials = 3;
 var nStages = 3; // should be 5 in the main experiment
 var nActions = 3;
 
+// CSS classes
+var buttonClasses = "btn btn-primary action ml-2 ml-2";
+var stageClasses = "d-flex flex-column justify-content-center text-center mt-3";
+var trialClasses = "row justify-content-center";
+
 var create_agent = function() {
   get_info()
 }
@@ -33,7 +38,7 @@ newTrial = function() {
   stageIndex = 1;
   $(".main_div").html("");
   if (trialIndex <= nTrials) {
-    $(".main_div").append(`<h1 class="trial-label" id="trial-${trialIndex}-label">Trial ${trialIndex}</h1>`);
+    $(".main_div").append(`<h1 class="${trialClasses}" id="trial-${trialIndex}-label">Trial ${trialIndex}</h1>`);
     renderStage();
   } else {
     endExperiment();
@@ -41,12 +46,12 @@ newTrial = function() {
 }
 
 renderStage = function() {
-  $(".main_div").append(`<div class="stage" id="stage-${stageIndex}"></div>`);
-  $(`#stage-${stageIndex}`).append(`<h2 class="stage-label">Stage ${stageIndex}</p>`);
-  $(`#stage-${stageIndex}`).append(`<div class id="stage-${stageIndex}-actions"></div>`);
+  $(".main_div").append(`<div class="${stageClasses}" id="stage-${stageIndex}"></div>`);
+  $(`#stage-${stageIndex}`).append(`<h2>Stage ${stageIndex}</p>`);
+  $(`#stage-${stageIndex}`).append(`<div id="stage-${stageIndex}-actions"></div>`);
   $(`#stage-${stageIndex}-actions`).append(`<p>Choose an action:</p>`);
   for (var i = 1; i <= nActions; i++) {
-    $(`#stage-${stageIndex}-actions`).append(`<button type="button" class="btn btn-primary action" id="stage-${stageIndex}-action-${i}">Action ${i}</button>`);
+    $(`#stage-${stageIndex}-actions`).append(`<button type="button" class="${buttonClasses}" id="stage-${stageIndex}-action-${i}">Action ${i}</button>`);
     $(`#stage-${stageIndex}-action-${i}`).click(makeActionFn(stageIndex, i))
   }
   $(`#stage-${stageIndex}`).append(`<div class="result" id="stage-${stageIndex}-result" style="display: none;">Reward: <span id="stage-${stageIndex}-reward"></span></div>`);
